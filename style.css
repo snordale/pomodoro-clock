@@ -1,6 +1,14 @@
 body {
     display: flex;
     justify-content: center;
+    font-family: neon;
+    background-color: black;
+    color: white;
+}
+
+svg {
+    fill: white;
+
 }
 
 h2, h3 {
@@ -22,7 +30,10 @@ h2, h3 {
 .header {
     display: flex;
     justify-content: center;
+    
 }
+
+    
 
 .icons {
     display: flex;
@@ -41,6 +52,7 @@ h2, h3 {
 .inks {
     display: flex;
     justify-content: space-between;
+    margin-top: 4vw
 }
 
 .sub-inks {
@@ -63,9 +75,40 @@ h2, h3 {
     justify-content: center;
 }
 
+.clocktime {
+    letter-spacing: 0.3em;
+    margin-left: .3em;
+}
+
+.inks .clocktime {
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+.inks .sub-icon, 
+.inks .add-icon {
+    width: 8px;
+}
+
 button {
-    background-color: white;
+    background-color: transparent;
+    color: white;
     outline: none;
     border: none;
+    
+    
 }
+
+.controls button {
+    font-family: neon;
+    font-size: 2vw;
+    margin: 0 2vw;
+}
+
+.controls button:hover {
+    text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff, 0 0 6px #00ffff, 0 0 20px #00ffff;
+}
+
+
+
 
