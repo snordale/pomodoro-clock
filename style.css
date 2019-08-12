@@ -101,7 +101,7 @@ button {
 
 .controls button {
     font-family: neon;
-    font-size: 2vw;
+    font-size: 4vw;
     margin: 0 2vw;
     transition: all 0.25s ease-in-out;
 }

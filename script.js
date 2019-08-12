@@ -79,6 +79,7 @@ function startTimer(element, timer) {
     let minutes = Number(timer.slice(3, 5));
     let seconds = Number(timer.slice(6, 8));
     let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+    console.log(totalSeconds)
     setInterval(function() {
         --totalSeconds;
         if (totalSeconds === 0) {
@@ -88,7 +89,7 @@ function startTimer(element, timer) {
         let remainder = totalSeconds % 3600;
         minutes = Math.floor(remainder / 60);
         seconds = remainder % 60;
-        timer = padNum(hours) + ':' + padNum(++minutes) + ':' + padNum(seconds);
+        timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
         element.textContent = timer;
     }, 1000);
 }
