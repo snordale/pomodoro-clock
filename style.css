@@ -2,12 +2,12 @@ body {
     display: flex;
     justify-content: center;
     font-family: neon;
-    background-color: black;
-    color: white;
+    background-color: #170000;
+    color: #FFE9E9;
 }
 
 svg {
-    fill: white;
+    fill: #FFE9E9;
 
 }
 
@@ -41,7 +41,7 @@ h2, h3 {
 }
 
 .clock-time {
-    font-size: 80px;
+    font-size: 8vw;
 }
 
 .controls {
@@ -67,7 +67,7 @@ h2, h3 {
 .time {
     display: flex;
     justify-content: center;
-    font-size: 20px;
+    font-size: 2vw;
 }
 
 .label {
@@ -75,9 +75,10 @@ h2, h3 {
     justify-content: center;
 }
 
-.clocktime {
+.timer {
     letter-spacing: 0.3em;
     margin-left: .3em;
+    width: 6em;
 }
 
 .inks .clocktime {
@@ -92,21 +93,39 @@ h2, h3 {
 
 button {
     background-color: transparent;
-    color: white;
+    color: #FFE9E9;
     outline: none;
     border: none;
-    
-    
+    cursor: pointer;
 }
 
 .controls button {
     font-family: neon;
     font-size: 2vw;
     margin: 0 2vw;
+    transition: all 0.25s ease-in-out;
 }
 
 .controls button:hover {
+    cursor: pointer;
+}
+
+#play {
+    color: #00ffff;
+}
+
+#restart {
+    color: #ff0000;
+}
+
+#play:hover {
+    color: #fff;
     text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff, 0 0 6px #00ffff, 0 0 20px #00ffff;
+}
+
+#restart:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #ff0000, 0 0 12px #ff0000, 0 0 6px #ff0000, 0 0 20px #ff0000;
 }
 
 
