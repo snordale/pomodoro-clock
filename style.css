@@ -1,7 +1,7 @@
 body {
     display: flex;
     justify-content: center;
-    font-family: neon;
+    font-family: proxima nova;
     background-color: #170000;
     color: #FFE9E9;
 }
@@ -77,8 +77,15 @@ h2, h3 {
 
 .timer {
     letter-spacing: 0.3em;
-    margin-left: .3em;
-    width: 6em;
+    margin-left: .2em;
+    width: 6.2em;
+}
+
+.inks {
+    height: auto;
+    transition: all 0.5s ease-in-out;
+    overflow: hidden;
+    padding: 0 10px;
 }
 
 .inks .clocktime {
@@ -114,7 +121,7 @@ button {
     color: #00ffff;
 }
 
-#restart {
+#reset {
     color: #ff0000;
 }
 
@@ -123,7 +130,7 @@ button {
     text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff, 0 0 6px #00ffff, 0 0 20px #00ffff;
 }
 
-#restart:hover {
+#reset:hover {
     color: #fff;
     text-shadow: 0 0 8px #ff0000, 0 0 12px #ff0000, 0 0 6px #ff0000, 0 0 20px #ff0000;
 }
