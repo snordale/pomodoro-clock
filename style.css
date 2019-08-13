@@ -58,7 +58,7 @@ h2, h3 {
 .inks {
     display: flex;
     justify-content: space-between;
-    margin-top: 4vw
+    margin-top: 4vh;
 }
 
 .sub-inks {
@@ -88,8 +88,8 @@ h2, h3 {
 }
 
 .inks-time {
-    margin-top: 1vw;
-    margin-bottom: 1vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .inks-time .timer {

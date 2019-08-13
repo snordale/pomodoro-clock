@@ -6,7 +6,38 @@ let subIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="4" vie
 <path id="ic_remove_24px" d="M23,13H5V11H23Z" transform="translate(-5 -11)"/>
 </svg>`
 
+let addIcons = document.querySelectorAll('.add-icon');
+addIcons.forEach(function (icon){
+    icon.innerHTML = addIcon
+    if (Array.from(icon.classList).indexOf('small-icon') !== -1) {
+        smallIcon = addIcon.replace('width="20"', 'width="14"')
+        icon.innerHTML = smallIcon;
+    }
+});
+
+let subIcons = document.querySelectorAll('.sub-icon');
+subIcons.forEach(function (icon){
+    icon.innerHTML = subIcon
+    if (Array.from(icon.classList).indexOf('small-icon') !== -1) {
+        smallIcon = subIcon.replace('width="20"', 'width="14"')
+        icon.innerHTML = smallIcon;
+    }
+});
+
 let windowWidth = window.innerWidth;
+let windowHeight = window.innerHeight;
+
+let inks = document.querySelector('.inks');
+let inksHeight = inks.offsetHeight;
+let inksRatio = inksHeight / windowHeight;
+inks.style.setProperty('height', inksHeight);
+
+function resizeInks() {
+    let windowHeight = window.innerHeight;
+    inksHeight = inksRatio * windowHeight;
+    console.log(inksHeight)
+    inks.style.setProperty('height', inksHeight);
+}
 
 let subInks = document.querySelectorAll('.sub-inks');
 let subInksWidth = subInks[0].offsetWidth;
@@ -31,6 +62,7 @@ function resizeContainer() {
 }
 
 window.addEventListener('resize', function() {
+    resizeInks();
     resizeSubInks();
     resizeContainer();
 });
@@ -39,24 +71,6 @@ function changeTitle() {
     let title = document.querySelector('title');
     title.textContent = document.querySelectorAll('.timer')[0].textContent;
 }
-
-let addIcons = document.querySelectorAll('.add-icon');
-addIcons.forEach(function (icon){
-    icon.innerHTML = addIcon
-    if (Array.from(icon.classList).indexOf('small-icon') !== -1) {
-        smallIcon = addIcon.replace('width="20"', 'width="14"')
-        icon.innerHTML = smallIcon;
-    }
-});
-
-let subIcons = document.querySelectorAll('.sub-icon');
-subIcons.forEach(function (icon){
-    icon.innerHTML = subIcon
-    if (Array.from(icon.classList).indexOf('small-icon') !== -1) {
-        smallIcon = subIcon.replace('width="20"', 'width="14"')
-        icon.innerHTML = smallIcon;
-    }
-});
 
 function padNum(num) {
     let string = '';
@@ -166,9 +180,6 @@ addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
 }))
 
 let playBtn = document.querySelector('#play');
-let inks = document.querySelector('.inks');
-let inksHeight = inks.offsetHeight;
-inks.style.setProperty('height', inksHeight);
 let intervalID;
 playBtn.addEventListener('mousedown', function() {
     if (playBtn.textContent === 'play') {
