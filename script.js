@@ -25,16 +25,21 @@ subIcons.forEach(function (icon){
 });
 
 let windowWidth = window.innerWidth;
-let windowHeight = window.innerHeight;
 
 let inks = document.querySelector('.inks');
 let inksHeight = inks.offsetHeight;
-let inksRatio = inksHeight / windowHeight;
+let clockHeight = document.querySelector('.clock').offsetHeight;
+let marginHeight = parseFloat(window.getComputedStyle(inks).marginTop);
+let totalHeight = inksHeight + clockHeight + marginHeight;
+let inksRatio = inksHeight / totalHeight;
 inks.style.setProperty('height', inksHeight);
 
 function resizeInks() {
-    let windowHeight = window.innerHeight;
-    inksHeight = inksRatio * windowHeight;
+    let inksHeight = inks.offsetHeight;
+    let clockHeight = document.querySelector('.clock').offsetHeight;
+    let marginHeight = parseFloat(window.getComputedStyle(inks).marginTop);
+    let totalHeight = inksHeight + clockHeight + marginHeight;
+    inksHeight = inksRatio * totalHeight;
     console.log(inksHeight)
     inks.style.setProperty('height', inksHeight);
 }

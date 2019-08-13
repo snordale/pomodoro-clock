@@ -38,7 +38,7 @@ h2, h3 {
 .header {
     display: flex;
     justify-content: center;
-    
+    font-size: 1vw;
 } 
 
 .icons {
@@ -73,6 +73,7 @@ h2, h3 {
 .label {
     display: flex;
     justify-content: center;
+    font-size: 1.5vw;
 }
 
 .timer {
