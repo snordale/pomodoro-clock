@@ -6,6 +6,35 @@ let subIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="4" vie
 <path id="ic_remove_24px" d="M23,13H5V11H23Z" transform="translate(-5 -11)"/>
 </svg>`
 
+let windowWidth = window.innerWidth;
+
+let subInks = document.querySelectorAll('.sub-inks');
+let subInksWidth = subInks[0].offsetWidth;
+let subInksRatio = subInksWidth / windowWidth;
+subInks.forEach(subInk => subInk.style.setProperty('width', subInksWidth));
+
+function resizeSubInks() {
+    let windowWidth = window.innerWidth;
+    subInksWidth = (subInksRatio) * windowWidth;
+    subInks.forEach(subInk => subInk.style.setProperty('width', subInksWidth));
+}
+
+let container = document.querySelector('.container');
+let containerWidth = container.offsetWidth;
+let containerRatio = containerWidth / windowWidth;
+container.style.setProperty('width', containerWidth);
+
+function resizeContainer() {
+    let windowWidth = window.innerWidth;
+    containerWidth = (containerRatio) * windowWidth;
+    container.style.setProperty('width', containerWidth);
+}
+
+window.addEventListener('resize', function() {
+    resizeSubInks();
+    resizeContainer();
+});
+
 function changeTitle() {
     let title = document.querySelector('title');
     title.textContent = document.querySelectorAll('.timer')[0].textContent;
@@ -42,8 +71,12 @@ function padNum(num) {
 function decrementTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
     let minutes = Number(timer.slice(3, 5));
-    let seconds = 60;
-    --minutes;
+    let seconds = Number(timer.slice(6, 8));
+    console.log(seconds)
+    if (seconds === 0) {
+        seconds = 60;
+        --minutes;
+    }
     setInterval(function () {
         if (seconds > 0) { 
             --seconds;
@@ -58,7 +91,7 @@ function decrementTimer(element, timer) {
 function incrementTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
     let minutes = Number(timer.slice(3, 5));
-    let seconds = 0;
+    let seconds = Number(timer.slice(6, 8));
     setInterval(function () {
         if (seconds < 59) { 
             ++seconds;
@@ -72,8 +105,6 @@ function incrementTimer(element, timer) {
         changeTitle();
     }, 10);
 }
-
-let intervalID;
 
 function stopTimer(element, timer, intervalID) {
     window.clearInterval(intervalID)
@@ -89,7 +120,7 @@ function startTimer(element, timer) {
     let minutes = Number(timer.slice(3, 5));
     let seconds = Number(timer.slice(6, 8));
     let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-    intervalID = window.setInterval(function() {
+    let intervalID = window.setInterval(function() {
         if (totalSeconds === 0) {
             stopTimer(element, timer, intervalID);
         } else {
@@ -119,21 +150,26 @@ function resetTimer(element, timer) {
 let timers = document.querySelectorAll('.timer');
 
 subIcons.forEach(icon => icon.addEventListener('mousedown', function() {
+    stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(subIcons);
     let idx = iconArray.indexOf(icon);
     decrementTimer(timers[idx], timers[idx].textContent);
+    playBtn.textContent = 'play';
 }))
 
 addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
+    stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(addIcons);
     let idx = iconArray.indexOf(icon);
     incrementTimer(timers[idx], timers[idx].textContent);
+    playBtn.textContent = 'play';
 }))
 
 let playBtn = document.querySelector('#play');
 let inks = document.querySelector('.inks');
 let inksHeight = inks.offsetHeight;
 inks.style.setProperty('height', inksHeight);
+let intervalID;
 playBtn.addEventListener('mousedown', function() {
     if (playBtn.textContent === 'play') {
         intervalID = startTimer(timers[0], timers[0].textContent)
