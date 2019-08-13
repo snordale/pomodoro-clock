@@ -90,17 +90,18 @@ function startTimer(element, timer) {
     let seconds = Number(timer.slice(6, 8));
     let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
     intervalID = window.setInterval(function() {
-        --totalSeconds;
         if (totalSeconds === 0) {
             stopTimer(element, timer, intervalID);
+        } else {
+            --totalSeconds;
+            hours = Math.floor(totalSeconds / 3600);
+            let remainder = totalSeconds % 3600;
+            minutes = Math.floor(remainder / 60);
+            seconds = remainder % 60;
+            timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
+            element.textContent = timer;
+            changeTitle();
         }
-        hours = Math.floor(totalSeconds / 3600);
-        let remainder = totalSeconds % 3600;
-        minutes = Math.floor(remainder / 60);
-        seconds = remainder % 60;
-        timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
-        element.textContent = timer;
-        changeTitle();
     }, 1000);
     return intervalID;
 }
