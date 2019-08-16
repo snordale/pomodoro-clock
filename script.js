@@ -201,20 +201,34 @@ function resetTimer(element) {
 
 let timers = document.querySelectorAll('.timer');
 
+let decrementID;
 subIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(subIcons);
     let idx = iconArray.indexOf(icon);
-    decrementTimer(timers[idx], timers[idx].textContent);
+    decrementID = setInterval(function() {
+        decrementTimer(timers[idx], timers[idx].textContent);
+    }, 10)
     playBtn.textContent = 'play';
 }))
 
+subIcons.forEach(icon => icon.addEventListener('mouseup', function() {
+    window.clearInterval(decrementID)
+}))
+
+let incrementID;
 addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(addIcons);
     let idx = iconArray.indexOf(icon);
-    incrementTimer(timers[idx], timers[idx].textContent);
+    incrementID = setInterval(function() {
+        incrementTimer(timers[idx], timers[idx].textContent);
+    }, 10)
     playBtn.textContent = 'play';
+}))
+
+addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
+    window.clearInterval(incrementID);
 }))
 
 let playBtn = document.querySelector('#play');
