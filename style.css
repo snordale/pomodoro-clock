@@ -37,8 +37,14 @@ h2, h3 {
 .header {
     display: flex;
     justify-content: center;
-    font-size: 1vw;
+    font-family: neon;
+    font-size: 2vw;
 } 
+
+.header:hover {
+    cursor: pointer;
+    text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff, 0 0 6px #00ffff, 0 0 20px #00ffff;
+}
 
 .icons {
     display: flex;
@@ -126,11 +132,11 @@ button {
 }
 
 #play {
-    color: #00ffff;
+    color: #ffffff;
 }
 
 #reset {
-    color: #ff0000;
+    color: #ffffff;
 }
 
 #play:hover {
@@ -140,9 +146,9 @@ button {
 
 #reset:hover {
     color: #fff;
-    text-shadow: 0 0 8px #ff0000, 0 0 12px #ff0000, 0 0 6px #ff0000, 0 0 20px #ff0000;
+    text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff, 0 0 6px #00ffff, 0 0 20px #00ffff;
 }
 
-
-
-
+.label button{
+    text-decoration: none;
+}
