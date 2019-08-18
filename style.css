@@ -15,7 +15,6 @@ svg {
 h2, h3 {
     margin: 0;
     display: block;
-    font-size: 1.5em;
     margin-block-start: 0;
     margin-block-end: 0;
     margin-inline-start: 0;
@@ -73,7 +72,12 @@ h2, h3 {
 .label {
     display: flex;
     justify-content: center;
-    font-size: 1.5vw;
+}
+
+.label button {
+    font-size: 2vw;
+    font-family: neon;
+    text-decoration: underline;
 }
 
 .timer {

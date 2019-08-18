@@ -89,7 +89,6 @@ function decrementTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
     let minutes = Number(timer.slice(3, 5));
     let seconds = Number(timer.slice(6, 8));
-    console.log(seconds)
     if (seconds === 0) {
         seconds = 60;
         --minutes;
@@ -123,6 +122,7 @@ function incrementTimer(element, timer) {
     }, 10);
 }
 
+let intervalID;
 function stopTimer(element, timer, intervalID) {
     window.clearInterval(intervalID)
     let hours = Number(timer.slice(0, 2));
@@ -130,6 +130,36 @@ function stopTimer(element, timer, intervalID) {
     let seconds = Number(timer.slice(6, 8));
     timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
     element.textContent = timer;
+}
+
+function getActiveMode() {
+    let active = document.querySelector('.active');
+    let children = Array.from(active.childNodes).filter(e => e.nodeName !== '#text');
+    let info = {};
+    info['element'] = active;
+    info['time'] = children[1].childNodes[1].textContent;
+    info['mode'] = children[2].childNodes[1].textContent;
+    return info;
+}
+
+function switchActiveMode() {
+    let workInks = document.querySelector('.work-inks');
+    let breakInks = document.querySelector('.break-inks');
+    workInks.classList.toggle('active');
+    breakInks.classList.toggle('active');
+    let info = getActiveMode();
+    let header = document.querySelector('.header');
+    header.childNodes[1].textContent = info['mode'].toUpperCase();
+}
+
+function switchTimer(element) {
+    switchActiveMode();
+    let info = getActiveMode();
+    if (info['mode'] === 'work') {
+        intervalID = startTimer(element, info['time']);
+    } else if (info['mode'] === 'break') {
+        intervalID = startTimer(element, info['time'])
+    }
 }
 
 function startTimer(element, timer) {
@@ -140,6 +170,7 @@ function startTimer(element, timer) {
     let intervalID = window.setInterval(function() {
         if (totalSeconds === 0) {
             stopTimer(element, timer, intervalID);
+            switchTimer(element);
         } else {
             --totalSeconds;
             hours = Math.floor(totalSeconds / 3600);
@@ -154,36 +185,53 @@ function startTimer(element, timer) {
     return intervalID;
 }
 
-function resetTimer(element, timer) {
-    let workTimer = document.querySelector('.inks-time').childNodes[1].textContent;
-    let hours = Number(workTimer.slice(0, 2));
-    let minutes = Number(workTimer.slice(3, 5));
-    let seconds = Number(workTimer.slice(6, 8));
-    timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
+function resetTimer(element) {
+    let info = getActiveMode();
+    let time = info['time']
+    let hours = Number(time.slice(0, 2));
+    let minutes = Number(time.slice(3, 5));
+    let seconds = Number(time.slice(6, 8));
+    let timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
     element.textContent = timer;
     changeTitle();
 }
 
+
+// click events
+
 let timers = document.querySelectorAll('.timer');
 
+let decrementID;
 subIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(subIcons);
     let idx = iconArray.indexOf(icon);
-    decrementTimer(timers[idx], timers[idx].textContent);
+    decrementID = setInterval(function() {
+        decrementTimer(timers[idx], timers[idx].textContent);
+    }, 10)
     playBtn.textContent = 'play';
 }))
 
+subIcons.forEach(icon => icon.addEventListener('mouseup', function() {
+    window.clearInterval(decrementID)
+}))
+
+let incrementID;
 addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(addIcons);
     let idx = iconArray.indexOf(icon);
-    incrementTimer(timers[idx], timers[idx].textContent);
+    incrementID = setInterval(function() {
+        incrementTimer(timers[idx], timers[idx].textContent);
+    }, 10)
     playBtn.textContent = 'play';
 }))
 
+addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
+    window.clearInterval(incrementID);
+}))
+
 let playBtn = document.querySelector('#play');
-let intervalID;
 playBtn.addEventListener('mousedown', function() {
     if (playBtn.textContent === 'play') {
         intervalID = startTimer(timers[0], timers[0].textContent)
@@ -202,5 +250,23 @@ restartBtn.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
     inks.style.height = inksHeight;
     playBtn.textContent = 'play';
-    resetTimer(timers[0], timers[0].textContent)
+    resetTimer(timers[0]);
 })
+
+let labelBtns = document.querySelectorAll('.label-btn');
+labelBtns.forEach(btn => btn.addEventListener('mousedown', function() {
+    let info = getActiveMode();
+    if (btn.textContent === 'work') {
+        while (info['mode'] !== 'work') {
+            switchActiveMode();
+            info = getActiveMode();
+        }
+        resetTimer(timers[0])
+    } else if (btn.textContent === 'break') {
+        while (info['mode'] !== 'break') {
+            switchActiveMode();
+            info = getActiveMode();
+        }
+        resetTimer(timers[0])
+    }
+}));
