@@ -89,6 +89,10 @@ function decrementTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
     let minutes = Number(timer.slice(3, 5));
     let seconds = Number(timer.slice(6, 8));
+    let totalTime = hours * 3600 + minutes * 60 + seconds
+    if (totalTime === 0) {
+        return;
+    }
     if (seconds === 0) {
         seconds = 60;
         --minutes;
@@ -101,7 +105,7 @@ function decrementTimer(element, timer) {
             element.textContent = timer;
         }
         changeTitle();
-    }, 1);
+    }, 10);
 }
 
 function incrementTimer(element, timer) {
@@ -119,7 +123,7 @@ function incrementTimer(element, timer) {
             element.textContent = timer;
         }
         changeTitle();
-    }, 1);
+    }, 10);
 };
 
 let intervalID;
@@ -209,7 +213,7 @@ subIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     let idx = iconArray.indexOf(icon);
     decrementID = setInterval(function() {
         decrementTimer(timers[idx], timers[idx].textContent);
-    }, 10)
+    }, 1)
     playBtn.textContent = 'play';
 }))
 
@@ -229,7 +233,7 @@ addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     let idx = iconArray.indexOf(icon);
     incrementID = setInterval(function() {
         incrementTimer(timers[idx], timers[idx].textContent);
-    }, 10)
+    }, 1)
     playBtn.textContent = 'play';
 }))
 
@@ -240,6 +244,7 @@ addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
 addIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
     window.clearInterval(incrementID)
 }))
+
 let clockHeader = document.querySelector('#clock-header');
 clockHeader.addEventListener('click', function() {
     let playBtn = document.querySelector('#play');
