@@ -237,11 +237,9 @@ addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
     window.clearInterval(incrementID);
 }))
 
-<<<<<<< HEAD
 addIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
     window.clearInterval(incrementID)
 }))
-=======
 let clockHeader = document.querySelector('#clock-header');
 clockHeader.addEventListener('click', function() {
     let playBtn = document.querySelector('#play');
@@ -260,7 +258,6 @@ clockHeader.addEventListener('click', function() {
     }
     playBtn.textContent = 'play';
 });
->>>>>>> upstream/master
 
 let playBtn = document.querySelector('#play');
 playBtn.addEventListener('mousedown', function() {
