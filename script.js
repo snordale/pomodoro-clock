@@ -216,6 +216,11 @@ subIcons.forEach(icon => icon.addEventListener('mouseup', function() {
     window.clearInterval(decrementID)
 }))
 
+subIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
+    window.clearInterval(decrementID)
+}))
+
+
 let incrementID;
 addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
@@ -229,6 +234,10 @@ addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
 
 addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
     window.clearInterval(incrementID);
+}))
+
+addIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
+    window.clearInterval(incrementID)
 }))
 
 let playBtn = document.querySelector('#play');
