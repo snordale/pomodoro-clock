@@ -105,7 +105,7 @@ function decrementTimer(element, timer) {
             element.textContent = timer;
         }
         changeTitle();
-    }, 10);
+    }, 1);
 }
 
 function incrementTimer(element, timer) {
@@ -123,7 +123,7 @@ function incrementTimer(element, timer) {
             element.textContent = timer;
         }
         changeTitle();
-    }, 10);
+    }, 1);
 };
 
 let intervalID;
