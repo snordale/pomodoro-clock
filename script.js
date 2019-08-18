@@ -73,7 +73,7 @@ window.addEventListener('resize', function() {
 function changeTitle() {
     let title = document.querySelector('title');
     title.textContent = document.querySelectorAll('.timer')[0].textContent;
-}
+};
 
 function padNum(num) {
     let string = '';
@@ -83,7 +83,7 @@ function padNum(num) {
         string = num.toString();
     }
     return string;
-}
+};
 
 function decrementTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
@@ -101,7 +101,7 @@ function decrementTimer(element, timer) {
             element.textContent = timer;
         }
         changeTitle();
-    }, 10);
+    }, 1);
 }
 
 function incrementTimer(element, timer) {
@@ -119,8 +119,8 @@ function incrementTimer(element, timer) {
             element.textContent = timer;
         }
         changeTitle();
-    }, 10);
-}
+    }, 1);
+};
 
 let intervalID;
 function stopTimer(element, timer, intervalID) {
@@ -130,7 +130,7 @@ function stopTimer(element, timer, intervalID) {
     let seconds = Number(timer.slice(6, 8));
     timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
     element.textContent = timer;
-}
+};
 
 function getActiveMode() {
     let active = document.querySelector('.active');
@@ -140,7 +140,7 @@ function getActiveMode() {
     info['time'] = children[1].childNodes[1].textContent;
     info['mode'] = children[2].childNodes[1].textContent;
     return info;
-}
+};
 
 function switchActiveMode() {
     let workInks = document.querySelector('.work-inks');
@@ -150,7 +150,7 @@ function switchActiveMode() {
     let info = getActiveMode();
     let header = document.querySelector('.header');
     header.childNodes[1].textContent = info['mode'].toUpperCase();
-}
+};
 
 function switchTimer(element) {
     switchActiveMode();
@@ -160,7 +160,7 @@ function switchTimer(element) {
     } else if (info['mode'] === 'break') {
         intervalID = startTimer(element, info['time'])
     }
-}
+};
 
 function startTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
@@ -195,6 +195,7 @@ function resetTimer(element) {
     element.textContent = timer;
     changeTitle();
 }
+
 
 
 // click events
@@ -236,9 +237,30 @@ addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
     window.clearInterval(incrementID);
 }))
 
+<<<<<<< HEAD
 addIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
     window.clearInterval(incrementID)
 }))
+=======
+let clockHeader = document.querySelector('#clock-header');
+clockHeader.addEventListener('click', function() {
+    let playBtn = document.querySelector('#play');
+    let info = getActiveMode();
+    if (info['mode'] === 'work' && clockHeader.textContent.toLowerCase() === 'work') {
+        stopTimer(timers[0], timers[0].textContent, intervalID);
+        switchActiveMode();
+        resetTimer(timers[0]);
+        
+    }
+    if (info['mode'] === 'break' && clockHeader.textContent.toLowerCase() === 'break') {
+        stopTimer(timers[0], timers[0].textContent, intervalID);
+        switchActiveMode();
+        resetTimer(timers[0]);
+        
+    }
+    playBtn.textContent = 'play';
+});
+>>>>>>> upstream/master
 
 let playBtn = document.querySelector('#play');
 playBtn.addEventListener('mousedown', function() {
@@ -260,7 +282,7 @@ restartBtn.addEventListener('mousedown', function() {
     inks.style.height = inksHeight;
     playBtn.textContent = 'play';
     resetTimer(timers[0]);
-})
+});
 
 let labelBtns = document.querySelectorAll('.label-btn');
 labelBtns.forEach(btn => btn.addEventListener('mousedown', function() {

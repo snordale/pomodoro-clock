@@ -1,2 +1,2 @@
 # pomodoro-clock
-Pair-programming project.
+Pair-programming project with Noah Talerman.
