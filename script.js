@@ -220,9 +220,16 @@ inksIcons.forEach(icon => icon.addEventListener('click', function() {
     let info = getActiveMode();
     let ink = icon.parentNode.parentNode;
     if (ink.classList.contains('active')) {
+        if (icon.classList.contains('add-icon')) {
         incrementTimer(timers[0], timers[0].textContent);
+        }
+        if (icon.classList.contains('sub-icon')) {
+            decrementTimer(timers[0], timers[0].textContent);
+            }
+        let inkTime = ink.querySelector('.label');
+        
+        
     }
-
 }));
 
 
