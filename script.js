@@ -51,7 +51,7 @@ function resizeSubInks() {
     let windowWidth = window.innerWidth;
     subInksWidth = (subInksRatio) * windowWidth;
     subInks.forEach(subInk => subInk.style.setProperty('width', subInksWidth));
-}
+};
 
 let container = document.querySelector('.container');
 let containerWidth = container.offsetWidth;
@@ -200,8 +200,6 @@ function resetTimer(element) {
     changeTitle();
 };
 
-
-
 // click events
 
 let timers = document.querySelectorAll('.timer');
@@ -217,6 +215,17 @@ subIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     playBtn.textContent = 'play';
 }));
 
+let inksIcons = document.querySelectorAll('.inks .small-icon');
+inksIcons.forEach(icon => icon.addEventListener('click', function() {
+    let info = getActiveMode();
+    let ink = icon.parentNode.parentNode;
+    if (ink.classList.contains('active')) {
+        incrementTimer(timers[0], timers[0].textContent);
+    }
+
+}));
+
+
 subIcons.forEach(icon => icon.addEventListener('mouseup', function() {
     window.clearInterval(decrementID);
 }));
@@ -224,7 +233,6 @@ subIcons.forEach(icon => icon.addEventListener('mouseup', function() {
 subIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
     window.clearInterval(decrementID);
 }));
-
 
 let incrementID;
 addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
