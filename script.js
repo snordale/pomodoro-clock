@@ -40,7 +40,7 @@ function resizeInks() {
     let totalHeight = inksHeight + clockHeight + marginHeight;
     inksHeight = inksRatio * totalHeight;
     inks.style.setProperty('height', inksHeight);
-}
+};
 
 let subInks = document.querySelectorAll('.sub-inks');
 let subInksWidth = subInks[0].offsetWidth;
@@ -62,7 +62,7 @@ function resizeContainer() {
     let windowWidth = window.innerWidth;
     containerWidth = (containerRatio) * windowWidth;
     container.style.setProperty('width', containerWidth);
-}
+};
 
 window.addEventListener('resize', function() {
     resizeInks();
@@ -89,6 +89,10 @@ function decrementTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
     let minutes = Number(timer.slice(3, 5));
     let seconds = Number(timer.slice(6, 8));
+    let totalTime = hours * 3600 + minutes * 60 + seconds
+    if (totalTime === 0) {
+        return;
+    }
     if (seconds === 0) {
         seconds = 60;
         --minutes;
@@ -102,7 +106,7 @@ function decrementTimer(element, timer) {
         }
         changeTitle();
     }, 1);
-}
+};
 
 function incrementTimer(element, timer) {
     let hours = Number(timer.slice(0, 2));
@@ -183,7 +187,7 @@ function startTimer(element, timer) {
         }
     }, 1000);
     return intervalID;
-}
+};
 
 function resetTimer(element) {
     let info = getActiveMode();
@@ -194,7 +198,7 @@ function resetTimer(element) {
     let timer = padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
     element.textContent = timer;
     changeTitle();
-}
+};
 
 
 
@@ -209,13 +213,18 @@ subIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     let idx = iconArray.indexOf(icon);
     decrementID = setInterval(function() {
         decrementTimer(timers[idx], timers[idx].textContent);
-    }, 10)
+    }, 1)
     playBtn.textContent = 'play';
-}))
+}));
 
 subIcons.forEach(icon => icon.addEventListener('mouseup', function() {
-    window.clearInterval(decrementID)
-}))
+    window.clearInterval(decrementID);
+}));
+
+subIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
+    window.clearInterval(decrementID);
+}));
+
 
 let incrementID;
 addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
@@ -224,13 +233,17 @@ addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     let idx = iconArray.indexOf(icon);
     incrementID = setInterval(function() {
         incrementTimer(timers[idx], timers[idx].textContent);
-    }, 10)
+    }, 1)
     playBtn.textContent = 'play';
-}))
+}));
 
 addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
     window.clearInterval(incrementID);
-}))
+}));
+
+addIcons.forEach(icon => icon.addEventListener('mouseleave', function() {
+    window.clearInterval(incrementID)
+}));
 
 let clockHeader = document.querySelector('#clock-header');
 clockHeader.addEventListener('click', function() {
@@ -254,12 +267,12 @@ clockHeader.addEventListener('click', function() {
 let playBtn = document.querySelector('#play');
 playBtn.addEventListener('mousedown', function() {
     if (playBtn.textContent === 'play') {
-        intervalID = startTimer(timers[0], timers[0].textContent)
+        intervalID = startTimer(timers[0], timers[0].textContent);
         inks.style.height = '0';
         playBtn.textContent = 'pause';
 
     } else if (playBtn.textContent === 'pause') {
-        stopTimer(timers[0], timers[0].textContent, intervalID)
+        stopTimer(timers[0], timers[0].textContent, intervalID);
         inks.style.height = inksHeight;
         playBtn.textContent = 'play';
     }
@@ -287,6 +300,6 @@ labelBtns.forEach(btn => btn.addEventListener('mousedown', function() {
             switchActiveMode();
             info = getActiveMode();
         }
-        resetTimer(timers[0])
+        resetTimer(timers[0]);
     }
 }));
