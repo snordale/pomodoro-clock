@@ -1,16 +1,12 @@
-let addIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-<path id="ic_add_24px" d="M23,15.286H15.286V23H12.714V15.286H5V12.714h7.714V5h2.571v7.714H23Z" transform="translate(-5 -5)"/>
-</svg>`
+let addIcon = `<svg role="img" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" aria-labelledby="addIconTitle" stroke="#FFE9E9" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#FFE9E9"> <title id="addIconTitle">Add</title> <path d="M17 12L7 12M12 17L12 7"/> <circle cx="12" cy="12" r="10"/> </svg>`
 
-let subIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="4" viewBox="0 0 20 4">
-<path id="ic_remove_24px" d="M23,13H5V11H23Z" transform="translate(-5 -11)"/>
-</svg>`
+let subIcon = `<svg role="img" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" aria-labelledby="removeIconTitle" stroke="#FFE9E9" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#FFE9E9"> <defs><filter id="shadow"><feDropShadow dx="0.2" dy="0.4" stdDeviation="0.2"/></filter></defs><title id="removeIconTitle">Remove</title> <path d="M17,12 L7,12"/> <circle cx="12" cy="12" r="10"/> </svg>`
 
 let addIcons = document.querySelectorAll('.add-icon');
 addIcons.forEach(function (icon){
     icon.innerHTML = addIcon
     if (Array.from(icon.classList).indexOf('small-icon') !== -1) {
-        smallIcon = addIcon.replace('width="20"', 'width="14"')
+        smallIcon = addIcon.replace('width="30px" height="30px"', 'width="20px" height="20px"')
         icon.innerHTML = smallIcon;
     }
 });
@@ -19,7 +15,7 @@ let subIcons = document.querySelectorAll('.sub-icon');
 subIcons.forEach(function (icon){
     icon.innerHTML = subIcon
     if (Array.from(icon.classList).indexOf('small-icon') !== -1) {
-        smallIcon = subIcon.replace('width="20"', 'width="14"')
+        smallIcon = subIcon.replace('width="30px" height="30px"', 'width="20px" height="20px"')
         icon.innerHTML = smallIcon;
     }
 });

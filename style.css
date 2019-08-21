@@ -8,8 +8,12 @@ body {
 }
 
 svg {
-    fill: #FFE9E9;
+    transition: all 0.3s linear;
+}
 
+svg:hover {
+    stroke: #fff;
+    filter: drop-shadow(0 0 1px #00ffff) drop-shadow(0 0 1px #00ffff) drop-shadow(0 0 10px #00ffff);
 }
 
 h2, h3 {
@@ -41,7 +45,13 @@ h2, h3 {
     font-size: 2vw;
 } 
 
-.header:hover {
+#clock-header {
+    color: #FFE9E9;
+    transition: all 0.3s linear;
+}
+
+#clock-header:hover {
+    color: #fff;
     cursor: pointer;
     text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff, 0 0 6px #00ffff, 0 0 20px #00ffff;
 }
@@ -95,7 +105,7 @@ h2, h3 {
     height: auto;
     transition: all 0.5s ease-in-out;
     overflow: hidden;
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .inks-time {
@@ -124,7 +134,7 @@ button {
     font-family: neon;
     font-size: 4vw;
     margin: 0 2vw;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .controls button:hover {
@@ -132,11 +142,11 @@ button {
 }
 
 #play {
-    color: #ffffff;
+    color: #FFE9E9;
 }
 
 #reset {
-    color: #ffffff;
+    color: #FFE9E9;
 }
 
 #play:hover {
@@ -151,4 +161,11 @@ button {
 
 .label button{
     text-decoration: none;
+    color: #FFE9E9;
+    transition: all 0.3s linear;
+}
+
+.label button:hover {
+    color: #fff;
+    text-shadow: 0 0 4px #00ffff, 0 0 8px #00ffff, 0 0 2px #00ffff, 0 0 16px #00ffff;
 }
