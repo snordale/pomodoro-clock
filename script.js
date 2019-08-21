@@ -102,6 +102,7 @@ function decrementTimer(element, timer) {
         }
         changeTitle();
     }, 1);
+    console.trace();
 };
 
 function incrementTimer(element, timer) {
@@ -205,10 +206,10 @@ subIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(subIcons);
     let idx = iconArray.indexOf(icon);
-    decrementID = setInterval(function() {
-        decrementTimer(timers[idx], timers[idx].textContent);
-    }, 1)
+    decrementTimer(timers[idx], timers[idx].textContent);
     playBtn.textContent = 'play';
+
+
 }));
 
 let inksIcons = document.querySelectorAll('.inks .small-icon');
@@ -222,9 +223,7 @@ inksIcons.forEach(icon => icon.addEventListener('click', function() {
         if (icon.classList.contains('sub-icon')) {
             decrementTimer(timers[0], timers[0].textContent);
             }
-        let inkTime = ink.querySelector('.label');
-        
-        
+        let inkTime = ink.querySelector('.label');   
     }
 }));
 
@@ -242,10 +241,10 @@ addIcons.forEach(icon => icon.addEventListener('mousedown', function() {
     stopTimer(timers[0], timers[0].textContent, intervalID)
     let iconArray = Array.from(addIcons);
     let idx = iconArray.indexOf(icon);
-    incrementID = setInterval(function() {
-        incrementTimer(timers[idx], timers[idx].textContent);
-    }, 1)
+    incrementTimer(timers[idx], timers[idx].textContent);
     playBtn.textContent = 'play';
+ 
+
 }));
 
 addIcons.forEach(icon => icon.addEventListener('mouseup', function() {
